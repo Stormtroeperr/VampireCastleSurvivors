@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 3896.0786, g: 3125.8618, b: 3230.6099, a: 1}
+  m_IndirectSpecularColor: {r: 262.38358, g: 325.10843, b: 430.30963, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -276,7 +276,7 @@ PrefabInstance:
     - target: {fileID: 1936380559266716368, guid: 8367b85b8b7ec674e95e8b19630857a5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 82.48455
+      value: 96.7
       objectReference: {fileID: 0}
     - target: {fileID: 1936380559266716368, guid: 8367b85b8b7ec674e95e8b19630857a5,
         type: 3}
@@ -286,7 +286,7 @@ PrefabInstance:
     - target: {fileID: 1936380559266716368, guid: 8367b85b8b7ec674e95e8b19630857a5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 92.451
+      value: 85.8
       objectReference: {fileID: 0}
     - target: {fileID: 1936380559266716368, guid: 8367b85b8b7ec674e95e8b19630857a5,
         type: 3}
@@ -935,6 +935,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Brazier
       objectReference: {fileID: 0}
+    - target: {fileID: 7187172130319505214, guid: c5b954324c2342947809c9697065ea73,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0.7957747
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1153,8 +1158,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 125007.484
+  m_Color: {r: 0.9622642, g: 0.7971914, b: 0.6309185, a: 1}
+  m_Intensity: 130000
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1203,7 +1208,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
-  m_ShadowAngle: 0
+  m_ShadowAngle: 2
 --- !u!4 &1257859644
 Transform:
   m_ObjectHideFlags: 0
@@ -1212,13 +1217,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257859642}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22105801, y: -0.14178364, z: 0.18163073, w: 0.94765025}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: -0.39156434, y: 0.12857372, z: -0.12187946, w: -0.902935}
+  m_LocalPosition: {x: 48.8, y: 3, z: 46.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 28.065, y: -12.329, z: 18.607}
+  m_LocalEulerAnglesHint: {x: 47.6, y: -371.7, z: 10.2}
 --- !u!114 &1257859645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1231,7 +1236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 125007.484
+  m_Intensity: 130000
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -1260,8 +1265,8 @@ MonoBehaviour:
   m_IncludeForRayTracing: 1
   m_AreaLightShadowCone: 120
   m_UseScreenSpaceShadows: 0
-  m_InteractsWithSky: 1
-  m_AngularDiameter: 0.5
+  m_InteractsWithSky: 0
+  m_AngularDiameter: 2
   m_FlareSize: 2
   m_FlareTint: {r: 1, g: 1, b: 1, a: 1}
   m_FlareFalloff: 4
@@ -1292,23 +1297,23 @@ MonoBehaviour:
   m_MaxDepthBias: 0.001
   m_ShadowResolution:
     m_Override: 512
-    m_UseOverride: 1
-    m_Level: 0
+    m_UseOverride: 0
+    m_Level: 3
   m_ShadowDimmer: 1
   m_VolumetricShadowDimmer: 1
   m_ShadowFadeDistance: 10000
   m_UseContactShadow:
     m_Override: 0
-    m_UseOverride: 1
-    m_Level: 0
+    m_UseOverride: 0
+    m_Level: 1
   m_RayTracedContactShadow: 0
   m_ShadowTint: {r: 0, g: 0, b: 0, a: 1}
   m_PenumbraTint: 0
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
-  m_ShadowUpdateMode: 0
+  m_ShadowUpdateMode: 1
   m_AlwaysDrawDynamicShadows: 0
-  m_UpdateShadowOnLightMovement: 0
+  m_UpdateShadowOnLightMovement: 1
   m_CachedShadowTranslationThreshold: 0.01
   m_CachedShadowAngularThreshold: 0.5
   m_BarnDoorAngle: 90
@@ -1328,7 +1333,7 @@ MonoBehaviour:
   m_ShadowVariant: 0
   m_ShadowPrecision: 0
   useOldInspector: 0
-  useVolumetric: 1
+  useVolumetric: 0
   featuresFoldout: 1
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
@@ -1402,7 +1407,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 22
+  field of view: 20
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1644,6 +1649,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Brazier (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7187172130319505214, guid: c5b954324c2342947809c9697065ea73,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0.7957747
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1698,10 +1708,10 @@ Terrain:
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 52f6c41d4ea6a0a46a650ae3b0188bb1, type: 2}
   m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
-  m_TreeCrossFadeLength: 5
+  m_TreeBillboardDistance: 188
+  m_TreeCrossFadeLength: 13
   m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
+  m_DetailObjectDistance: 278
   m_DetailObjectDensity: 1
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
@@ -2097,7 +2107,7 @@ PrefabInstance:
     - target: {fileID: 1936380559266716368, guid: 8367b85b8b7ec674e95e8b19630857a5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.592697
+      value: 27.95
       objectReference: {fileID: 0}
     - target: {fileID: 1936380559266716368, guid: 8367b85b8b7ec674e95e8b19630857a5,
         type: 3}
@@ -2107,7 +2117,7 @@ PrefabInstance:
     - target: {fileID: 1936380559266716368, guid: 8367b85b8b7ec674e95e8b19630857a5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 94.51767
+      value: 92.37
       objectReference: {fileID: 0}
     - target: {fileID: 1936380559266716368, guid: 8367b85b8b7ec674e95e8b19630857a5,
         type: 3}
@@ -2212,6 +2222,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Brazier (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7187172130319505214, guid: c5b954324c2342947809c9697065ea73,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0.7957747
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2279,6 +2294,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Brazier (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187172130319505214, guid: c5b954324c2342947809c9697065ea73,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0.7957747
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
