@@ -17,6 +17,9 @@ public class PlayerMovement : MonoBehaviour
     private InputActionMap _inputPlayer;
     private InputAction _moveAction;
     
+    [SerializeField]
+    private Transform modelTransform;
+    
     private void Awake()
     {
         _movement = GetComponent<Movement>();
@@ -44,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         const float detectionRadius = 100f;
         var hitColliders = new Collider[10];
 
-        var numColliders = Physics.OverlapSphereNonAlloc(transform.position, detectionRadius, hitColliders);
+        var numColliders = Physics.OverlapSphereNonAlloc(modelTransform.position, detectionRadius, hitColliders);
 
         var closestDistance = detectionRadius;
 
@@ -54,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!hitColliders[i].gameObject.CompareTag("Enemy")) continue;
 
-            var distance = Vector3.Distance(transform.position, hitColliders[i].transform.position);
+            var distance = Vector3.Distance(modelTransform.position, hitColliders[i].transform.position);
 
             if (!(distance < closestDistance)) continue;
 
@@ -65,16 +68,16 @@ public class PlayerMovement : MonoBehaviour
         if (!(bool)closestEnemy) return;
         
 
-        var directionToEnemy = (closestEnemy.position - transform.position).normalized;
+        var directionToEnemy = (closestEnemy.position - modelTransform.position).normalized;
         var lookRotation = Quaternion.LookRotation(directionToEnemy);
         
-        var rotation = transform.rotation;
+        var rotation = modelTransform.rotation;
         
         lookRotation.x = rotation.x;
         lookRotation.z = rotation.z;
         
         rotation = lookRotation;
-        transform.rotation = rotation;
+        modelTransform.rotation = rotation;
     }
     
     private void Move(InputAction.CallbackContext ctx)
