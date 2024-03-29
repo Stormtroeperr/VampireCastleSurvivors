@@ -1,13 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Movement : MonoBehaviour
 {
     private Rigidbody _rb;
-    void Update()
+
+    private void Awake()
     {
-        
+        _rb = GetComponent<Rigidbody>();
+    }
+
+    public void SetVelocity(Vector3 vel)
+    {
+        _rb.velocity = vel;
     }
 }
