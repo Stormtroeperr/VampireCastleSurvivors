@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Interfaces;
+using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, IDamagable
 {
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float currentHealth = 100f;

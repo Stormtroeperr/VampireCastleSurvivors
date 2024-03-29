@@ -43,7 +43,8 @@ public class EnemyMovement : MonoBehaviour
 
     private Vector3 GetTargetPositionOrRandom()
     {
-        if ((bool)target)
+        // Check if the target exists and if the target is active
+        if ((bool)target && target.gameObject.activeSelf)
         {
             return target.position;
         }
