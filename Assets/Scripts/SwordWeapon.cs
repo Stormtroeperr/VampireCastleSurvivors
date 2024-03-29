@@ -1,75 +1,71 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using Interfaces;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SwordWeapon : BaseWeapon
 {
-    private MeshCollider _swordCollider;
-    [SerializeField] private Mesh swordMesh;
-    
+    private Collider _swordCollider;
+    private Vector3 _originalSwordPosition;
+
     protected void Start()
     {
-        _swordCollider = gameObject.AddComponent<MeshCollider>();
-        _swordCollider.sharedMesh = swordMesh;
-        _swordCollider.convex = true;
+        _swordCollider = GetComponent<BoxCollider>();
+        _originalSwordPosition = transform.localPosition;
+        
+        StartCoroutine(AutoAttack(attackSpeed));
     }
 
-    private Mesh CreateCuboidMesh(float length, float width, float height)
-{
-    var mesh = new Mesh();
-
-    var vertices = new Vector3[24]
+    protected override void EnableCollider()
     {
-        new(-length * .5f, -width * .5f, height * .5f),
-        new(length * .5f, -width * .5f, height * .5f),
-        new(length * .5f, -width * .5f, -height * .5f),
-        new(-length * .5f, -width * .5f, -height * .5f),
-        new(-length * .5f, width * .5f, height * .5f),
-        new(length * .5f, width * .5f, height * .5f),
-        new(length * .5f, width * .5f, -height * .5f),
-        new(-length * .5f, width * .5f, -height * .5f),
-        new(-length * .5f, -width * .5f, height * .5f),
-        new(length * .5f, -width * .5f, height * .5f),
-        new(length * .5f, width * .5f, height * .5f),
-        new(-length * .5f, width * .5f, height * .5f),
-        new(-length * .5f, -width * .5f, -height * .5f),
-        new(length * .5f, -width * .5f, -height * .5f),
-        new(length * .5f, width * .5f, -height * .5f),
-        new(-length * .5f, width * .5f, -height * .5f),
-        new(-length * .5f, width * .5f, -height * .5f),
-        new(-length * .5f, width * .5f, height * .5f),
-        new(-length * .5f, -width * .5f, height * .5f),
-        new(-length * .5f, -width * .5f, -height * .5f),
-        new(length * .5f, width * .5f, -height * .5f),
-        new(length * .5f, width * .5f, height * .5f),
-        new(length * .5f, -width * .5f, height * .5f),
-        new(length * .5f, -width * .5f, -height * .5f)
-    };
-
-    int[] triangles = {
-        0, 2, 1, //face front
-        0, 3, 2,
-        2, 3, 4, //face top
-        2, 4, 5,
-        1, 2, 5, //face right
-        1, 5, 6,
-        0, 7, 4, //face left
-        0, 4, 1,
-        5, 4, 7, //face back
-        5, 7, 6,
-        0, 6, 7, //face bottom
-        0, 1, 6
-    };
-
-    mesh.vertices = vertices;
-    mesh.triangles = triangles;
-    mesh.RecalculateNormals();
-
-    return mesh;
-}
+        _swordCollider.enabled = true;
+    }
     
-    public void Attack()
+    protected override void DisableCollider()
+    {
+        _swordCollider.enabled = false;
+    }
+
+    private IEnumerator AutoAttack(float interval)
+    {
+        while (true)
+        {
+            Attack();
+            yield return new WaitForSeconds(interval);
+        }
+    }
+
+    private void Attack()
+    {
+        StartCoroutine(ShakeSword(0.1f, 0.5f));
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.CompareTag("Enemy")) return;
+        var enemy = other.GetComponent<IDamagable>();
+        enemy.Damage(attackDamage);
+    }
+    
+    private IEnumerator ShakeSword(float duration, float magnitude)
     {
         EnableCollider();
+        var elapsed = 0.0f;
 
+        while (elapsed < duration)
+        {
+            var x = _originalSwordPosition.x + Random.Range(-1f, 1f) * magnitude;
+            var y = _originalSwordPosition.y + Random.Range(-1f, 1f) * magnitude;
+
+            transform.localPosition = new Vector3(x, y, _originalSwordPosition.z);
+
+            elapsed += Time.deltaTime;
+            
+            yield return null;
+        }
+
+        transform.localPosition = _originalSwordPosition;
         DisableCollider();
     }
 }
