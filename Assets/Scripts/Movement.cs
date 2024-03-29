@@ -14,4 +14,9 @@ public class Movement : MonoBehaviour
     {
         _rb.velocity = vel;
     }
+    
+    public Vector3 GetVelocity()
+    {
+        return _rb.velocity;
+    }
 }
