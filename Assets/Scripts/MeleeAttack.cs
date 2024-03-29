@@ -41,6 +41,10 @@ public class MeleeAttack: MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
+        
+        StopCoroutine(_attackCoroutine);
+        
+        _attackCoroutine = null;
         _targetHealth = null;
     }
 }
