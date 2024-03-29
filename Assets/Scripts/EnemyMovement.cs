@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
-
 
 public enum MovementType
 {
@@ -14,7 +12,7 @@ public class EnemyMovement : MonoBehaviour
 {
     public Transform target;
     
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float speed = 3.5f;
     [SerializeField] private float mapSize = 10f;
     [SerializeField] private Vector3 currentRandomPosition;
     [SerializeField] private MovementType movementType;
@@ -28,7 +26,7 @@ public class EnemyMovement : MonoBehaviour
     }
     
     public void FixedUpdate()
-    {
+    { 
         MoveTowardsTarget();
     }
     
