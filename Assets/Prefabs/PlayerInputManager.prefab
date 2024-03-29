@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1991136000239660368}
   - component: {fileID: 3232142928416376971}
+  - component: {fileID: 6085241524014500469}
   m_Layer: 0
   m_Name: PlayerInputManager
   m_TagString: Untagged
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_NotificationBehavior: 0
   m_MaxPlayerCount: 2
   m_AllowJoining: 1
-  m_JoinBehavior: 0
+  m_JoinBehavior: 2
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -77,3 +78,17 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &6085241524014500469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636623362191036462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 117cad0806f18457e9bd611ea68b80e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaPrefab: {fileID: 3959100719054357413, guid: c8974ff266c5244ebb657dd89838f6df,
+    type: 3}

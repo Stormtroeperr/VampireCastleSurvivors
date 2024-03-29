@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 
 public enum MovementType
@@ -11,7 +12,8 @@ public enum MovementType
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    public Transform target;
+    
     [SerializeField] private float speed = 5f;
     [SerializeField] private float mapSize = 10f;
     [SerializeField] private Vector3 currentRandomPosition;
