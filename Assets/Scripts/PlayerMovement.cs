@@ -49,35 +49,28 @@ public class PlayerMovement : MonoBehaviour
 
         var numColliders = Physics.OverlapSphereNonAlloc(modelTransform.position, detectionRadius, hitColliders);
 
-        var closestDistance = detectionRadius;
+        // Sort the colliders based on their distance to the player
+        Array.Sort(hitColliders, 0, numColliders, new DistanceComparer(modelTransform.position));
 
-        Transform closestEnemy = null;
-
-        for (var i = 0; i < numColliders; i++)
+        // Find the first collider that is tagged as "Enemy"
+        foreach (var hitCollider in hitColliders)
         {
-            if (!hitColliders[i].gameObject.CompareTag("Enemy")) continue;
+            if (!(bool)hitCollider || !hitCollider.CompareTag("Enemy")) continue;
+            
+            
+            var directionToEnemy = (hitCollider.transform.position - modelTransform.position).normalized;
+            var lookRotation = Quaternion.LookRotation(directionToEnemy);
 
-            var distance = Vector3.Distance(modelTransform.position, hitColliders[i].transform.position);
+            // Keep the player's current x and z rotation and only change the y rotation to look at the enemy
+            lookRotation.x = modelTransform.rotation.x;
+            lookRotation.z = modelTransform.rotation.z;
 
-            if (!(distance < closestDistance)) continue;
+            // Interpolate between the player's current rotation and the desired rotation over time
+            modelTransform.rotation = Quaternion.Lerp(modelTransform.rotation, lookRotation, Time.deltaTime * speed);
 
-            closestDistance = distance;
-            closestEnemy = hitColliders[i].transform;
+            // Stop looking for enemies as soon as the closest one is found
+            break;
         }
-
-        if (!(bool)closestEnemy) return;
-        
-
-        var directionToEnemy = (closestEnemy.position - modelTransform.position).normalized;
-        var lookRotation = Quaternion.LookRotation(directionToEnemy);
-        
-        var rotation = modelTransform.rotation;
-        
-        lookRotation.x = rotation.x;
-        lookRotation.z = rotation.z;
-        
-        rotation = lookRotation;
-        modelTransform.rotation = rotation;
     }
     
     private void Move(InputAction.CallbackContext ctx)

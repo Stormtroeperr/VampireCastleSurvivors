@@ -12,7 +12,8 @@ public class MeleeAttack: MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        _targetHealth = other.GetComponent<IDamagable>();
+        // We get the IDamagable component from the parent of the collider which is the player object
+        _targetHealth = other.GetComponentInParent<IDamagable>();
     }
 
     private void OnTriggerStay(Collider other)
