@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public enum MovementType
 {
     WALKING,
@@ -11,7 +10,8 @@ public enum MovementType
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    public Transform target;
+    
     [SerializeField] private float speed = 3.5f;
     [SerializeField] private float mapSize = 10f;
     [SerializeField] private Vector3 currentRandomPosition;

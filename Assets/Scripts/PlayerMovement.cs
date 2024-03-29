@@ -30,7 +30,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _movement.SetVelocity(new Vector3(_moveDirection.x, 0, _moveDirection.y) * speed);
+        float yVel = _movement.GetVelocity().y;
+        _movement.SetVelocity(new Vector3(_moveDirection.x, yVel, _moveDirection.y) * speed);
     }
 
     private void Move(InputAction.CallbackContext ctx)
