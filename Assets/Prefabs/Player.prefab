@@ -235,6 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 100
+  isGodMode: 1
 --- !u!1001 &8996677114903788277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -243,6 +244,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 598536031028447883}
     m_Modifications:
+    - target: {fileID: 4983727779259989374, guid: 06ddb2e818fe74511a8b43d46591c5ad,
+        type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7542277314893504255, guid: 06ddb2e818fe74511a8b43d46591c5ad,
         type: 3}
       propertyPath: m_Name
