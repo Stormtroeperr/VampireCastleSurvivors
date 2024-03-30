@@ -8,6 +8,7 @@ public class SwordWeapon : BaseWeapon
 {
     private Collider _swordCollider;
     private Vector3 _originalSwordPosition;
+    private bool _isSwinging = false;
 
     protected void Start()
     {
@@ -38,7 +39,12 @@ public class SwordWeapon : BaseWeapon
 
     private void Attack()
     {
-        StartCoroutine(ShakeSword(0.1f, 0.5f));
+        if (_isSwinging)
+        {
+            return;
+        }
+   
+        StartCoroutine(SwingSword(1f));
     }
     
     private void OnTriggerEnter(Collider other)
@@ -47,25 +53,26 @@ public class SwordWeapon : BaseWeapon
         var enemy = other.GetComponent<IDamagable>();
         enemy.Damage(attackDamage);
     }
-    
-    private IEnumerator ShakeSword(float duration, float magnitude)
+
+    private IEnumerator SwingSword(float speed)
     {
+        _isSwinging = true;
         EnableCollider();
         var elapsed = 0.0f;
+        var duration = 2f;
+
 
         while (elapsed < duration)
         {
-            var x = _originalSwordPosition.x + Random.Range(-1f, 1f) * magnitude;
-            var y = _originalSwordPosition.y + Random.Range(-1f, 1f) * magnitude;
-
-            transform.localPosition = new Vector3(x, y, _originalSwordPosition.z);
+            var angle = Mathf.PingPong(elapsed * speed, 1) * 180;
+            transform.localRotation =
+                Quaternion.Euler(0, angle + 90, 90); // Rotation around local Y-axis and rotate the sword 90 degrees
 
             elapsed += Time.deltaTime;
-            
             yield return null;
         }
 
-        transform.localPosition = _originalSwordPosition;
         DisableCollider();
+        _isSwinging = false;
     }
 }
