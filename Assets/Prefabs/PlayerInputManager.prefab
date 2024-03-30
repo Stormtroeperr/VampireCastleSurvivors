@@ -115,3 +115,4 @@ MonoBehaviour:
     type: 3}
   playerWorldCanvas: {fileID: 5303042119458053227, guid: a536940052434ba459fb3ab3bd08ecc5,
     type: 3}
+  spawnAreaOffset: 1200
