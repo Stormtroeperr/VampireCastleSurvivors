@@ -45,6 +45,7 @@ Material:
   - _DISABLE_DECALS
   - _DISABLE_SSR_TRANSPARENT
   - _DOUBLESIDED_ON
+  - _ENABLE_FOG_ON_TRANSPARENT
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords:
   - _NORMALMAP_TANGENT_SPACE
@@ -221,7 +222,7 @@ Material:
     - _EmissiveIntensity: 1
     - _EmissiveIntensityUnit: 0
     - _EnableBlendModePreserveSpecularLighting: 0
-    - _EnableFogOnTransparent: 0
+    - _EnableFogOnTransparent: 1
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
     - _ExcludeFromTUAndAA: 0
@@ -304,9 +305,9 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0.25318295, g: 0.5283019, b: 0.09718762, a: 1}
-    - _Color1: {r: 0.754717, g: 0.13883947, b: 0.13883947, a: 0}
-    - _Color2: {r: 0.7264151, g: 0.3529281, b: 0.3529281, a: 0}
-    - _Color3: {r: 0.627451, g: 1, b: 0.81977034, a: 0}
+    - _Color1: {r: 0.6933962, g: 1, b: 0.97812116, a: 0}
+    - _Color2: {r: 0.1462264, g: 0.8632577, b: 1, a: 0}
+    - _Color3: {r: 0, g: 0.7845664, b: 1, a: 0}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
@@ -314,7 +315,7 @@ Material:
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _Root_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Root_Color: {r: 0, g: 0.54078674, b: 1, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _Tip_Color: {r: 0.12139947, g: 0.0970096, b: 0.18867922, a: 0}
