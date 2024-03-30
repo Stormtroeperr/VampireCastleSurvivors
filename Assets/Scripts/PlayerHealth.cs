@@ -71,6 +71,12 @@ public class PlayerHealth : Health
         healthBarBackground.transform.position = _originalPosition;
     }
 
+    protected override void SetToDeath()
+    {
+        base.SetToDeath();
+        GetComponentInParent<Transform>().gameObject.SetActive(false);
+    }
+    
     private IEnumerator LerpHealth(float newFillAmount)
     {
         const float duration = 0.2f; // Duration in seconds over which the fill amount will lerp.

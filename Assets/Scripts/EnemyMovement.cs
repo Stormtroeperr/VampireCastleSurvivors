@@ -15,19 +15,30 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float speed = 3.5f;
     [SerializeField] private float mapSize = 10f;
     [SerializeField] private Vector3 currentRandomPosition;
+    [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private MovementType movementType;
     
     private Rigidbody _rb;
     
-    // TODO: Get assigned a target from the GameManager
     public void Awake()
     {
         _rb = GetComponent<Rigidbody>();
     }
     
-    public void FixedUpdate()
-    { 
+    private void FixedUpdate()
+    {
         MoveTowardsTarget();
+        RotateTowardsTarget();
+    }
+
+    private void RotateTowardsTarget()
+    {
+        if ((bool)target && target.gameObject.activeSelf)
+        {
+            var direction = (target.position - _rb.position).normalized;
+            var targetRotation = Quaternion.LookRotation(direction);
+            _rb.rotation = Quaternion.Lerp(_rb.rotation, targetRotation, Time.fixedDeltaTime * rotationSpeed);
+        }
     }
     
     private void MoveTowardsTarget()
