@@ -13,19 +13,15 @@ public class GameStarter : MonoBehaviour
     {
         _playerInputManager = GetComponent<PlayerInputManager>();
     }
-    
-    private void Update()
+    public void OnPlayerJoined(PlayerInput player)
     {
-        if (!Input.GetKeyDown(KeyCode.Space) || _isGameStarted) return;
-        
-        var playerInput1 = _playerInputManager.JoinPlayer(0, 0);
-        // _playerInputManager.JoinPlayer(1, 1);
+        if (_isGameStarted) return;
         
         var area = Instantiate(areaPrefab, Vector3.zero, Quaternion.identity);
         var enemySpawner = area.GetComponentInChildren<EnemySpawner>();
 
-        enemySpawner.playerCamera = playerInput1.camera;
-        enemySpawner.playerTransform = playerInput1.transform;
+        enemySpawner.playerCamera = player.camera;
+        enemySpawner.playerTransform = player.transform;
         
         _isGameStarted = true;
     }
