@@ -33,12 +33,11 @@ public class EnemyMovement : MonoBehaviour
 
     private void RotateTowardsTarget()
     {
-        if ((bool)target && target.gameObject.activeSelf)
-        {
-            var direction = (target.position - _rb.position).normalized;
-            var targetRotation = Quaternion.LookRotation(direction);
-            _rb.rotation = Quaternion.Lerp(_rb.rotation, targetRotation, Time.fixedDeltaTime * rotationSpeed);
-        }
+        if (!(bool)target || !target.gameObject.activeSelf) return;
+        
+        var direction = (target.position - _rb.position).normalized;
+        var targetRotation = Quaternion.LookRotation(direction);
+        _rb.rotation = Quaternion.Lerp(_rb.rotation, targetRotation, Time.fixedDeltaTime * rotationSpeed);
     }
     
     private void MoveTowardsTarget()
@@ -63,6 +62,7 @@ public class EnemyMovement : MonoBehaviour
         if (Vector3.Distance(_rb.position, currentRandomPosition) < 1f)
         {
             currentRandomPosition = GenerateRandomPosition();
+            
         }
 
         return currentRandomPosition;
