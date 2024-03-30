@@ -1,22 +1,28 @@
-using System.Collections.Generic;
+using System.Collections;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class GameStarter : MonoBehaviour
 {
-    private void LinkHealthBarWithPlayer(PlayerInput player, GameObject area)
+    [SerializeField] private SceneAsset mainMenu;
+    [SerializeField] private SceneAsset level;
+    
+    public void StartGame()
     {
-        var canvasInstance = Instantiate(playerWorldCanvas, Vector3.zero, Quaternion.identity);
-        
-        // Assign the player's camera to the player's canvas so we can see the canvas
-        var parentHealthBar = canvasInstance.GetComponentInChildren<Image>();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadSceneAsync(level.name, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync(mainMenu.name, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+    }
 
-        //Give the player a reference to the image
-        var playerHealth = player.GetComponentInChildren<PlayerHealth>();
-        playerHealth.SetHealthBar(parentHealthBar.gameObject);
-        
-        //Set the camera to the right canvas
-        canvasInstance.GetComponent<Canvas>().worldCamera = player.camera;
+    private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
+    {
+        if (scene.name == level.name)
+        {
+            SceneManager.SetActiveScene(scene);
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
     }
 }

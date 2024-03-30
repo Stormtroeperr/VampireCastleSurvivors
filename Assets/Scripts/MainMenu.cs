@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour, IPlayerJoinListener
     private bool _playerAReady, _playerBReady;
     private PlayerJoinHandler _gameStarter;
 
-    private void Awake()
+    private void Start()
     {
         EventSystem.current.firstSelectedGameObject = startGame.gameObject;
 

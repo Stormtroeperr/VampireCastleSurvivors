@@ -2,5 +2,7 @@ using UnityEngine;
 
 public class Terrain : MonoBehaviour
 {
-    [SerializeField] private GameObject playerSpawn;
+    [SerializeField] private PlayerSpawner playerSpawner;
+    
+    public PlayerSpawner PlayerSpawner => playerSpawner;
 }

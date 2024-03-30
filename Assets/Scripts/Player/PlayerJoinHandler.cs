@@ -9,26 +9,30 @@ public class PlayerJoinHandler : MonoBehaviour, IPlayerJoinListener
     private PlayerInputManager _playerInputManager;
     private bool _isGameStarted;
     
-    private int _spawnedPlayers;
+    public List<PlayerInput> _playerInputHandler = new();
     
     // List of IPlayerJoinListener instances
-    private List<IPlayerJoinListener> _playerJoinListeners = new();
+    private readonly List<IPlayerJoinListener> _playerJoinListeners = new();
     
     private void Awake  ()
     {
         _playerInputManager = GetComponent<PlayerInputManager>();
     }
     
+    // OnPlayerJoined method receives a PlayerInput instance and adds it to the list.
+    // this instance is a PlayerInputHandler but not the player prefab itself.
     public void OnPlayerJoined(PlayerInput player)
     {
+        _playerInputHandler.Add(player);
+
+        player.GetComponent<PlayerInputHandler>();
+        
         foreach (var listener in _playerJoinListeners)
         {
             listener.OnPlayerJoined(player);
         }
         
-        _spawnedPlayers++;
-        
-        if (_spawnedPlayers == 2)
+        if (_playerInputHandler.Count == 2)
         {
             _playerInputManager.DisableJoining();
         }
@@ -44,5 +48,10 @@ public class PlayerJoinHandler : MonoBehaviour, IPlayerJoinListener
     public void RemovePlayerJoinListener(IPlayerJoinListener listener)
     {
         _playerJoinListeners.Remove(listener);
+    }
+    
+    public int GetPlayerCount()
+    {
+        return _playerInputHandler.Count;
     }
 }
