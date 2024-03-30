@@ -8,24 +8,23 @@ public class PlayerMovement : MonoBehaviour
 {
     private Movement _movement;
 
-    [SerializeField]
-    private float speed = 5f;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float detectionRadius = 10f;
 
     private Vector2 _moveDirection;
-    
+
     private InputActionAsset _inputActionAsset;
     private InputActionMap _inputPlayer;
     private InputAction _moveAction;
-    
-    [SerializeField]
-    private Transform modelTransform;
-    
+
+    [SerializeField] private Transform modelTransform;
+
     private void Awake()
     {
         _movement = GetComponent<Movement>();
-        
+
         _inputActionAsset = GetComponent<PlayerInput>().actions;
-        _inputPlayer = _inputActionAsset.FindActionMap("PlayerMovement"); 
+        _inputPlayer = _inputActionAsset.FindActionMap("PlayerMovement");
         _moveAction = _inputPlayer.FindAction("Move");
         _moveAction.performed += Move;
         _moveAction.canceled += Move;
@@ -44,45 +43,53 @@ public class PlayerMovement : MonoBehaviour
 
     private void LookAtClosestEnemy()
     {
-        const float detectionRadius = 100f;
-        var hitColliders = new Collider[10];
+        //TODO: Change this later since it's not efficient to find all enemies every frame.
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        var numColliders = Physics.OverlapSphereNonAlloc(modelTransform.position, detectionRadius, hitColliders);
+        GameObject closestEnemy = null;
+        var closestDistance = detectionRadius;
 
-        // Sort the colliders based on their distance to the player
-        Array.Sort(hitColliders, 0, numColliders, new DistanceComparer(modelTransform.position));
-
-        // Find the first collider that is tagged as "Enemy"
-        foreach (var hitCollider in hitColliders)
+        foreach (var enemy in enemies)
         {
-            if (!(bool)hitCollider || !hitCollider.CompareTag("Enemy")) continue;
-            
-            
-            var directionToEnemy = (hitCollider.transform.position - modelTransform.position).normalized;
-            var lookRotation = Quaternion.LookRotation(directionToEnemy);
-
-            // Keep the player's current x and z rotation and only change the y rotation to look at the enemy
-            lookRotation.x = modelTransform.rotation.x;
-            lookRotation.z = modelTransform.rotation.z;
-
-            // Interpolate between the player's current rotation and the desired rotation over time
-            modelTransform.rotation = Quaternion.Lerp(modelTransform.rotation, lookRotation, Time.deltaTime * speed);
-
-            // Stop looking for enemies as soon as the closest one is found
-            break;
+            var distance = Vector3.Distance(modelTransform.position, enemy.transform.position);
+            if (!(distance < closestDistance)) continue;
+            closestDistance = distance;
+            closestEnemy = enemy;
         }
+
+        if ((bool)closestEnemy && closestDistance <= detectionRadius)
+        {
+            var directionToEnemy = (closestEnemy.transform.position - modelTransform.position).normalized;
+            var lookAtEnemyRotation = Quaternion.LookRotation(directionToEnemy);
+
+            var rotation = modelTransform.rotation;
+            lookAtEnemyRotation.x = rotation.x;
+            lookAtEnemyRotation.z = rotation.z;
+
+            rotation = Quaternion.Lerp(rotation, lookAtEnemyRotation, Time.deltaTime * speed);
+            modelTransform.rotation = rotation;
+            return;
+        }
+        
+        var flatMoveDirection = new Vector3(_moveDirection.x, 0, _moveDirection.y);
+        
+        // Only change the rotation if the player is actually moving
+        if (!(flatMoveDirection.sqrMagnitude > 0.01f)) return;
+        
+        var lookAtWalkingRotation = Quaternion.LookRotation(flatMoveDirection);
+        modelTransform.rotation = Quaternion.Lerp(modelTransform.rotation, lookAtWalkingRotation, Time.deltaTime * speed);
     }
-    
+
     private void Move(InputAction.CallbackContext ctx)
     {
-        _moveDirection = ctx.ReadValue<Vector2>();      
+        _moveDirection = ctx.ReadValue<Vector2>();
     }
-    
+
     private void OnEnable()
     {
         _inputPlayer.Enable();
     }
-    
+
     private void OnDisable()
     {
         _inputPlayer.Disable();
