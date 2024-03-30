@@ -32,7 +32,7 @@ public class Health : MonoBehaviour, IDamagable
         return currentHealth;
     }
     
-    private void SetToDeath()
+    protected virtual void SetToDeath()
     {
         OnDie?.Invoke(gameObject);
         gameObject.SetActive(false);
