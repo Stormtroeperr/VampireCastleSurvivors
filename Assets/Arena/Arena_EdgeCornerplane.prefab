@@ -68,6 +68,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arena_EdgeCornerplane
       objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: 45618e12fbaad034191aaf2e60f9f0be,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
