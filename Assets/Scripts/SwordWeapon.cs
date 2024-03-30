@@ -44,7 +44,7 @@ public class SwordWeapon : BaseWeapon
             return;
         }
    
-        StartCoroutine(SwingSword(10f));
+        StartCoroutine(SwingSword(1f));
     }
     
     private void OnTriggerEnter(Collider other)
