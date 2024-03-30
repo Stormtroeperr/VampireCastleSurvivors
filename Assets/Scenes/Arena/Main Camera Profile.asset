@@ -1,24 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5341059466352396273
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32b6af8f7ad32324cb6941c3290e5895, type: 3}
-  m_Name: MicroShadowing
-  m_EditorClassIdentifier: 
-  active: 0
-  enable:
-    m_OverrideState: 0
-    m_Value: 0
-  opacity:
-    m_OverrideState: 0
-    m_Value: 1
 --- !u!114 &-4575487251754188057
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -118,16 +99,16 @@ MonoBehaviour:
     m_Value: 0
   contrast:
     m_OverrideState: 1
-    m_Value: -21.8
+    m_Value: -41
   colorFilter:
-    m_OverrideState: 1
-    m_Value: {r: 0.9292453, g: 0.94867885, b: 1, a: 1}
+    m_OverrideState: 0
+    m_Value: {r: 0.7971698, g: 0.84899694, b: 1, a: 1}
   hueShift:
     m_OverrideState: 1
-    m_Value: -8
+    m_Value: -5
   saturation:
     m_OverrideState: 1
-    m_Value: 12.8
+    m_Value: 64
 --- !u!114 &-3606539934613546563
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -189,10 +170,10 @@ MonoBehaviour:
     m_Value: 1
   skyAmbientMode:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: 1
   windOrientation:
     m_OverrideState: 1
-    m_Value: 84
+    m_Value: 73
   windSpeed:
     m_OverrideState: 1
     m_Value: 0
@@ -211,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953beb541740ddc499d005ee80c9ff29, type: 3}
   m_Name: Fog
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   quality:
     m_OverrideState: 0
     m_Value: 1
@@ -304,60 +285,10 @@ MonoBehaviour:
   - {fileID: 1545075711763338247}
   - {fileID: 3412603048246338362}
   - {fileID: -3875194291003691055}
-  - {fileID: 353412070584908117}
   - {fileID: -1347429594876407204}
-  - {fileID: -5341059466352396273}
   - {fileID: -1056145181447724950}
   - {fileID: -4575487251754188057}
---- !u!114 &353412070584908117
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56b145d2b9ee1ac4f846968484e7485a, type: 3}
-  m_Name: ContactShadows
-  m_EditorClassIdentifier: 
-  active: 0
-  quality:
-    m_OverrideState: 0
-    m_Value: 1
-  enable:
-    m_OverrideState: 1
-    m_Value: 1
-  length:
-    m_OverrideState: 1
-    m_Value: 0.33
-  opacity:
-    m_OverrideState: 0
-    m_Value: 1
-  distanceScaleFactor:
-    m_OverrideState: 1
-    m_Value: 0.5
-  maxDistance:
-    m_OverrideState: 0
-    m_Value: 50
-  minDistance:
-    m_OverrideState: 1
-    m_Value: 0
-  fadeDistance:
-    m_OverrideState: 0
-    m_Value: 5
-  fadeInDistance:
-    m_OverrideState: 0
-    m_Value: 0
-  rayBias:
-    m_OverrideState: 0
-    m_Value: 0.2
-  thicknessScale:
-    m_OverrideState: 0
-    m_Value: 0.15
-  m_SampleCount:
-    m_OverrideState: 0
-    m_Value: 10
+  - {fileID: 1904160855035879414}
 --- !u!114 &1545075711763338247
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -379,10 +310,32 @@ MonoBehaviour:
     m_Value: {fileID: 0}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.025
+    m_Value: 0.166
   m_MaxSamples:
     m_OverrideState: 0
     m_Value: 6
+--- !u!114 &1904160855035879414
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5ab44aadfb1804db5fd470983ac1b8, type: 3}
+  m_Name: LiftGammaGain
+  m_EditorClassIdentifier: 
+  active: 1
+  lift:
+    m_OverrideState: 0
+    m_Value: {x: 0.9460618, y: 0.8823616, z: 1, w: 0}
+  gamma:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 0.9517933, z: 0.9983885, w: -0.07255138}
+  gain:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: 0.19347034}
 --- !u!114 &3412603048246338362
 MonoBehaviour:
   m_ObjectHideFlags: 3
