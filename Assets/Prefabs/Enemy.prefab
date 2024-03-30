@@ -130,7 +130,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1747723683890590239
 Rigidbody:
@@ -188,7 +188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a67444841d5743f490c7618204ff0a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
   maxHealth: 10
   currentHealth: 10
   isGodMode: 0
@@ -204,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd6862c74c64cc897d2963c049c8b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 1
 --- !u!1001 &2961931546007740349
 PrefabInstance:
   m_ObjectHideFlags: 0

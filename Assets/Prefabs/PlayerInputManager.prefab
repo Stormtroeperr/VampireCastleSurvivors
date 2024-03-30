@@ -113,3 +113,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   areaPrefab: {fileID: 3959100719054357413, guid: c8974ff266c5244ebb657dd89838f6df,
     type: 3}
+  playerWorldCanvas: {fileID: 5303042119458053227, guid: a536940052434ba459fb3ab3bd08ecc5,
+    type: 3}

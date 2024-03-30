@@ -19,7 +19,7 @@ public class MeleeAttack: MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (!IsAbleToAttack(other)) return;
-        _attackCoroutine = StartCoroutine(DoDamage());
+        _targetHealth?.Damage(attackDamage);
     }
     
     /*
@@ -30,21 +30,9 @@ public class MeleeAttack: MonoBehaviour
         return other.CompareTag("Player") && _targetHealth != null && _attackCoroutine == null;
     }
     
-    private IEnumerator DoDamage()
-    {
-        yield return new WaitForSeconds(0.5f);
-        _targetHealth?.Damage(attackDamage);
-        
-        StopCoroutine(_attackCoroutine);
-        _attackCoroutine = null;
-    }
-    
     private void OnTriggerExit(Collider other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
-
-        if (_attackCoroutine != null)
-            StopCoroutine(_attackCoroutine);
         
         _attackCoroutine = null;
         _targetHealth = null;
