@@ -68,6 +68,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arena_Edgeplane
       objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: e0de441b827fcae4382c69427de2fdbd,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6889800039409901121, guid: e0de441b827fcae4382c69427de2fdbd,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
