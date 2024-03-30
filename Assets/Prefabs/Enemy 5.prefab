@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 964638587271106779}
   - component: {fileID: 8561671817721877398}
   m_Layer: 3
-  m_Name: Goblin
+  m_Name: Enemy 5
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.686, y: 0.506, z: -3.5259895}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6321797320601958983}
@@ -188,8 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a67444841d5743f490c7618204ff0a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  currentHealth: 10
+  maxHealth: 200
+  currentHealth: 200
   isGodMode: 0
 --- !u!114 &8561671817721877398
 MonoBehaviour:
@@ -267,6 +267,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4858297208777822914, guid: fb903df5a1b57bb489a839f94f4d5709,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9222417f72caea941a95df425b2bdf27, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
