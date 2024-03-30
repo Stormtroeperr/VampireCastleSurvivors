@@ -1,12 +1,16 @@
-﻿using Interfaces;
+﻿using System;
+using Interfaces;
 using UnityEngine;
 
 public class Health : MonoBehaviour, IDamagable
 {
+    [SerializeField] private GameObject healthBar;
+    
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float currentHealth = 100f;
     
-    [SerializeField] private bool isGodMode = false;
+    [SerializeField] private bool isGodMode;
+    
     
     public delegate void DieAction(GameObject deadObject);
     public event DieAction OnDie;

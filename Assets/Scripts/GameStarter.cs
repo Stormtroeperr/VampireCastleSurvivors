@@ -18,7 +18,7 @@ public class GameStarter : MonoBehaviour
         if (_isGameStarted) return;
         
         var area = Instantiate(areaPrefab, Vector3.zero, Quaternion.identity);
-        var enemySpawner = area.GetComponentInChildren<EnemySpawner>();
+        var enemySpawner = area.GetComponentInChildren<EnemySpawner.EnemySpawner>();
 
         enemySpawner.playerCamera = player.camera;
         enemySpawner.playerTransform = player.transform;

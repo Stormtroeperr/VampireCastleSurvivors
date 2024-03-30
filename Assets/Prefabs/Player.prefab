@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a67444841d5743f490c7618204ff0a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
   maxHealth: 100
   currentHealth: 100
   isGodMode: 0
@@ -397,6 +398,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2290862237685635970, guid: 9b79321b0390b924c85c6a7baa3bae85,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.17352332
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290862237685635970, guid: 9b79321b0390b924c85c6a7baa3bae85,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.3450189
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290862237685635970, guid: 9b79321b0390b924c85c6a7baa3bae85,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -408,7 +419,7 @@ PrefabInstance:
     - target: {fileID: 2290862237685635970, guid: 9b79321b0390b924c85c6a7baa3bae85,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.282
+      value: 1.843
       objectReference: {fileID: 0}
     - target: {fileID: 2290862237685635970, guid: 9b79321b0390b924c85c6a7baa3bae85,
         type: 3}
