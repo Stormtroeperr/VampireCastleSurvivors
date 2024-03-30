@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6215810836016116378}
   - component: {fileID: 1216790611790240033}
   - component: {fileID: 1491534021706897700}
+  - component: {fileID: 5593636098631906675}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -123,6 +124,19 @@ TerrainCollider:
   serializedVersion: 2
   m_TerrainData: {fileID: 15600000, guid: 52f6c41d4ea6a0a46a650ae3b0188bb1, type: 2}
   m_EnableTreeColliders: 1
+--- !u!114 &5593636098631906675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8112368637190600125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a87c23d8084802bc19e3fe502df2f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpawn: {fileID: 4263081207088820632}
 --- !u!1001 &443302012772730505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2291,6 +2305,12 @@ PrefabInstance:
 --- !u!4 &2843115237807248579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5474895555812184111, guid: 1ccc0aed0bb093f40a9c56ef363d0af2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7822324563538904300}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4263081207088820632 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6316293510704182644, guid: 1ccc0aed0bb093f40a9c56ef363d0af2,
     type: 3}
   m_PrefabInstance: {fileID: 7822324563538904300}
   m_PrefabAsset: {fileID: 0}
