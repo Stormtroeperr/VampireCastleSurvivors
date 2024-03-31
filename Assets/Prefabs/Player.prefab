@@ -150,8 +150,8 @@ MonoBehaviour:
   currentHealth: 500
   playerWorldCanvasPrefab: {fileID: 5878164810530828541, guid: a536940052434ba459fb3ab3bd08ecc5,
     type: 3}
-  isGodMode: 0
   canvasCamera: {fileID: 9217136625659335574}
+  isGodMode: 0
 --- !u!1 &6631257755423517750
 GameObject:
   m_ObjectHideFlags: 0
