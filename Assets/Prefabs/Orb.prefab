@@ -51,7 +51,7 @@ MonoBehaviour:
   frequency: 1
   rotationSpeed: 100
   playerTransform: {fileID: 0}
-  pickupDistance: 5
+  pickupDistance: 10
   moveSpeed: 12
   xpValue: 10
 --- !u!65 &2779500915158385019

@@ -16,7 +16,7 @@ namespace Player
         // List of IPlayerJoinListener instances
         private readonly List<IPlayerJoinListener> _playerJoinListeners = new();
     
-        private void Awake  ()
+        private void Awake()
         {
             _playerInputManager = GetComponent<PlayerInputManager>();
         }
@@ -27,8 +27,7 @@ namespace Player
         {
             _playerInputHandler.Add(player);
 
-            player.GetComponent<PlayerInputHandler>();
-        
+            // Notify all listeners that a player has joined
             foreach (var listener in _playerJoinListeners)
             {
                 listener.OnPlayerJoined(player);
@@ -55,6 +54,11 @@ namespace Player
         public int GetPlayerCount()
         {
             return _playerInputHandler.Count;
+        }
+        
+        public PlayerInput[] GetPlayerInputHandlers()
+        {
+            return _playerInputHandler.ToArray();
         }
     }
 }
