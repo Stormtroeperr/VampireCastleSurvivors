@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1991136000239660368}
   - component: {fileID: 3232142928416376971}
-  - component: {fileID: 6085241524014500469}
+  - component: {fileID: 8455700282202456629}
   m_Layer: 0
   m_Name: PlayerInputManager
   m_TagString: Untagged
@@ -46,14 +46,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 2
-  m_MaxPlayerCount: 3
+  m_MaxPlayerCount: -1
   m_AllowJoining: 1
-  m_JoinBehavior: 1
+  m_JoinBehavior: 0
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6085241524014500469}
-        m_TargetAssemblyTypeName: GameStarter, Assembly-CSharp
+      - m_Target: {fileID: 8455700282202456629}
+        m_TargetAssemblyTypeName: PlayerJoinHandler, Assembly-CSharp
         m_MethodName: OnPlayerJoined
         m_Mode: 0
         m_Arguments:
@@ -88,7 +88,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 1355755118322679278, guid: 6c48cb873a4e645be9fa549727049670,
       type: 3}
-  m_PlayerPrefab: {fileID: 6631257755423517750, guid: b587423ba887343daae3208e1d1d6e47,
+  m_PlayerPrefab: {fileID: 8505397776784520811, guid: c457686219734470b899a6d83e3fca9e,
     type: 3}
   m_SplitScreen: 1
   m_MaintainAspectRatioInSplitScreen: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &6085241524014500469
+--- !u!114 &8455700282202456629
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,10 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 636623362191036462}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 117cad0806f18457e9bd611ea68b80e0, type: 3}
+  m_Script: {fileID: 11500000, guid: d33b5231aa84d4b4cb42dfd94a8a4332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaPrefab: {fileID: 3959100719054357413, guid: c8974ff266c5244ebb657dd89838f6df,
-    type: 3}
-  playerWorldCanvas: {fileID: 5303042119458053227, guid: a536940052434ba459fb3ab3bd08ecc5,
-    type: 3}
+  _players: []

@@ -16,11 +16,11 @@
                 },
                 {
                     "name": "Join Action",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "3fb0caca-ccab-4c19-a48c-f40dbe5e459f",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(behavior=1)",
                     "initialStateCheck": true
                 }
             ],

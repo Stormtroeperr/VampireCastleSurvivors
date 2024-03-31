@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/OutdoorsScene.unity
-    guid: 8124e5870f4fd4c779e7a5f994e84ad1
+    path: Assets/Scenes/BaseTemplate.unity
+    guid: dd7da000094b846dabf9aa3e5a14795e
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 41d1b92cb2b92453dbaba254e800636d
+  - enabled: 1
+    path: Assets/Scenes/Level.unity
+    guid: 7d139e45672584ca7acb1126adf8df70
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 51236360dd08e439a81daa8728203b62,
       type: 2}

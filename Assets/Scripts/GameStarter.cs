@@ -1,47 +1,28 @@
+using System.Collections;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(PlayerInputManager))]
 public class GameStarter : MonoBehaviour
 {
-    private PlayerInputManager _playerInputManager;
-    private bool _isGameStarted;
-
-    [SerializeField] private GameObject areaPrefab;
-    [SerializeField] private GameObject playerWorldCanvas;
+    [SerializeField] private SceneAsset mainMenu;
+    [SerializeField] private SceneAsset level;
     
-    private void Awake  ()
+    public void StartGame()
     {
-        _playerInputManager = GetComponent<PlayerInputManager>();
-    }
-    public void OnPlayerJoined(PlayerInput player)
-    {
-        if (_isGameStarted) return;
-        
-        var area = Instantiate(areaPrefab, Vector3.zero, Quaternion.identity);
-        var enemySpawner = area.GetComponentInChildren<EnemySpawner.EnemySpawner>();
-        
-        enemySpawner.playerCamera = player.camera;
-        enemySpawner.playerTransform = player.transform;
-        
-        LinkHealthBarWithPlayer(player, area);
-        
-        _isGameStarted = true;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadSceneAsync(level.name, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync(mainMenu.name, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
     }
 
-    private void LinkHealthBarWithPlayer(PlayerInput player, GameObject area)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        var canvasInstance = Instantiate(playerWorldCanvas, Vector3.zero, Quaternion.identity);
-        
-        // Assign the player's camera to the player's canvas so we can see the canvas
-        var parentHealthBar = canvasInstance.GetComponentInChildren<Image>();
-
-        //Give the player a reference to the image
-        var playerHealth = player.GetComponentInChildren<PlayerHealth>();
-        playerHealth.SetHealthBar(parentHealthBar.gameObject);
-        
-        //Set the camera to the right canvas
-        canvasInstance.GetComponent<Canvas>().worldCamera = player.camera;
+        if (scene.name == level.name)
+        {
+            SceneManager.SetActiveScene(scene);
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
     }
 }
