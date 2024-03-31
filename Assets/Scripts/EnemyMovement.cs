@@ -12,9 +12,14 @@ public class EnemyMovement : MonoBehaviour
 {
     public Transform target;
     
+    
+    [SerializeField] private  Vector3 _targetPosition;
+    
     [SerializeField] private float speed = 3.5f;
     [SerializeField] private float mapSize = 10f;
+    
     [SerializeField] private Vector3 currentRandomPosition;
+    
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private MovementType movementType;
     
@@ -33,16 +38,16 @@ public class EnemyMovement : MonoBehaviour
 
     private void RotateTowardsTarget()
     {
-        if (!(bool)target || !target.gameObject.activeSelf) return;
-        
-        var direction = (target.position - _rb.position).normalized;
+        var direction = (_targetPosition - _rb.position).normalized;
         var targetRotation = Quaternion.LookRotation(direction);
         _rb.rotation = Quaternion.Lerp(_rb.rotation, targetRotation, Time.fixedDeltaTime * rotationSpeed);
     }
     
     private void MoveTowardsTarget()
     {
-        var direction = GetTargetPositionOrRandom() - _rb.position;
+        _targetPosition = GetTargetPositionOrRandom();
+        
+        var direction = _targetPosition - _rb.position;
         direction.Normalize();
         
         var speedDeltaTime = speed * Time.fixedDeltaTime;
@@ -58,18 +63,15 @@ public class EnemyMovement : MonoBehaviour
         {
             return target.position;
         }
-        
-        if (Vector3.Distance(_rb.position, currentRandomPosition) < 1f)
-        {
-            currentRandomPosition = GenerateRandomPosition();
-            
-        }
 
+        if (!(Vector3.Distance(_rb.position, currentRandomPosition) < 1f)) return currentRandomPosition;
+        
+        currentRandomPosition = GenerateRandomPosition();
         return currentRandomPosition;
     }
     
     private Vector3 GenerateRandomPosition()
     {
-        return new Vector3(Random.Range(-mapSize / 2, mapSize / 2), 0, Random.Range(-mapSize / 2, mapSize / 2));
+        return new Vector3(Random.Range(-mapSize / 2, mapSize / 2), 1, Random.Range(-mapSize / 2, mapSize / 2));
     }
 }

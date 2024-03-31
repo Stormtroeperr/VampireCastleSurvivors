@@ -1,6 +1,7 @@
-using UnityEngine;
-
-public class Debug : UnityEngine.Debug
+namespace EnemySpawner
 {
+    public class Debug : UnityEngine.Debug
+    {
 
+    }
 }
