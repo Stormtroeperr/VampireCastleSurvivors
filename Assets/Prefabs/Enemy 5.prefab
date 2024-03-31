@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6321797320601958983}
@@ -207,6 +207,8 @@ MonoBehaviour:
   currentHealth: 500
   onDeathParticlePrefab: {fileID: 4420003607963709086, guid: 3acaa773c34c98844a5f139ab7b4d36f,
     type: 3}
+  xpValue: 50
+  goldValue: 25
 --- !u!1001 &5713742547691109290
 PrefabInstance:
   m_ObjectHideFlags: 0

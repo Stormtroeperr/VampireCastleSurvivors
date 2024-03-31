@@ -207,6 +207,8 @@ MonoBehaviour:
   currentHealth: 200
   onDeathParticlePrefab: {fileID: 4420003607963709086, guid: 3acaa773c34c98844a5f139ab7b4d36f,
     type: 3}
+  xpValue: 20
+  goldValue: 10
 --- !u!1001 &2961931546007740349
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Health;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -25,17 +26,22 @@ namespace EnemySpawner
         [SerializeField] private int enemiesKilled = 0;
         [SerializeField] private int enemiesKilledThisWave = 0;
         
+        [SerializeField] private List<GameObject> spawnedEnemies;
+        
         public Camera playerCamera;
         public Transform playerTransform;
-
+        public delegate void OnEnemySpawnedAction(GameObject enemy);
+        public event OnEnemySpawnedAction OnEnemySpawned;
+        
         private void Update()
         {
             if (!(Time.time >= _nextSpawnTime)) return;
 
             SpawnEnemy();
             _nextSpawnTime = Time.time + 1f / spawnRate;
-        }
 
+        }
+        
         private void SpawnEnemy()
         {
 
@@ -87,6 +93,10 @@ namespace EnemySpawner
 
             var enemyPrefab = enemyPrefabs[index];
             var enemyMovement = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity).GetComponent<EnemyMovement>();
+            
+            spawnedEnemies.Add(enemyMovement.gameObject);
+            OnEnemySpawned?.Invoke(enemyMovement.gameObject);
+            
             enemyMovement.GetComponent<EnemyHealth>().OnDie += OnEnemyDeath;
             
             enemyMovement.Target = playerTransform.transform;
@@ -94,6 +104,7 @@ namespace EnemySpawner
 
         private void OnEnemyDeath(GameObject enemy)
         {
+            spawnedEnemies.Remove(enemy);
             enemiesKilled++;
             enemiesKilledThisWave++;
         }
