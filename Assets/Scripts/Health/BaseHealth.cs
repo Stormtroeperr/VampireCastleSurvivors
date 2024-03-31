@@ -34,7 +34,7 @@ namespace Health
         protected virtual void SetToDeath()
         {
             OnDie?.Invoke(gameObject);
-            gameObject.SetActive(false);
+            Destroy(gameObject);
             currentHealth = maxHealth;
         }
     
