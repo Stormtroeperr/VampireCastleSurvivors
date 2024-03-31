@@ -49,10 +49,10 @@ namespace EnemySpawner
 
             // Instantiate the enemy at the new spawn position
             var enemyMovement = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-            enemyMovement.target = playerTransform.transform;
+            enemyMovement.Target = playerTransform.transform;
         }
 
-        public bool IsPositionInCameraFrustum(Camera cam, Vector3 position)
+        private bool IsPositionInCameraFrustum(Camera cam, Vector3 position)
         {
             // Create a negligible size bounds at the position
             Bounds bounds = new Bounds(position, Vector3.zero);
