@@ -1,18 +1,23 @@
 using System;
+using System.Collections;
 using Interfaces;
 using Player;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Networking.PlayerConnection;
 using UnityEngine.UI;
+using PlayerInput = UnityEngine.InputSystem.PlayerInput;
 
 public class MainMenu : MonoBehaviour, IPlayerJoinListener
 {
     [SerializeField] private TextMeshProUGUI playerA, playerB;
     [SerializeField] private Button startGame;
 
-    private bool _playerAReady, _playerBReady;
+    [SerializeField] private Transform Player1Position, Player2Position;
+
     private PlayerJoinHandler _gameStarter;
 
     private void Start()
@@ -27,27 +32,32 @@ public class MainMenu : MonoBehaviour, IPlayerJoinListener
         startGame.gameObject.SetActive(false);
     }
 
-    private void OnDisable()
-    {
-        _gameStarter.RemovePlayerJoinListener(this);
-    }
-
     public void OnPlayerJoined(PlayerInput player)
     {
-        if (player.playerIndex == 0)
+        var cc = player.GetComponent<CharacterController>();
+        cc.enabled = false;
+        
+        
+        player.camera.enabled = false;
+        
+        
+        var playerTransform = player.transform;
+        
+        switch (player.playerIndex)
         {
-            playerA.text = "Player A Joined!";
-            playerA.color = Color.green;
-            _playerAReady = true;
+            case 0:
+                playerA.text = "Player A Joined!";
+                playerA.color = Color.green;
+                playerTransform.position = Player1Position.position;
+                playerTransform.rotation = Player1Position.rotation;
+                break;
+            case 1:
+                playerB.text = "Player B Joined!";
+                playerB.color = Color.green;
+                playerTransform.position = Player2Position.position;
+                playerTransform.rotation = Player2Position.rotation;
+                break;
         }
-        else if (player.playerIndex == 1)
-        {
-            playerB.text = "Player B Joined!";
-            playerB.color = Color.green;
-            _playerBReady = true;
-        }
-
-        if (!_playerAReady || !_playerBReady) return;
 
         GameObject button = startGame.gameObject;
         button.SetActive(true);

@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class Inventory: MonoBehaviour
 {
-    [Header("Enemy spawning settings")]
-    // We need this here for now so we can easily get the enemies and subscribe to their death events
-    [SerializeField] private GameObject areaControllerPrefab;
+
     
     [Header("Inventory Settings")]
     [SerializeField] private int xp;
@@ -19,9 +17,8 @@ public class Inventory: MonoBehaviour
     
     private EnemySpawner.EnemySpawner _enemySpawner;
     
-    public void Awake()
+    public void SetEnemySpawner(GameObject areaController)
     {
-        var areaController = Instantiate(areaControllerPrefab, transform.position, Quaternion.identity);
         _enemySpawner = areaController.GetComponent<EnemySpawner.EnemySpawner>();
 
         //We want to get the Model of the player and the only way we can get that is by getting the playerhealth component

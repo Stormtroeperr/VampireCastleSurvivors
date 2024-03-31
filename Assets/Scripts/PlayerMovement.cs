@@ -2,31 +2,59 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using UnityEngine.TextCore.Text;
 
 public class PlayerMovement : Movement
 {
+    
     private Movement _movement;
 
     [SerializeField] private float speed = 5f;
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private float detectionRadius = 10f;
-
+    
+    private InputActionAsset _inputActionAsset;
+    private InputActionMap _inputPlayer;
 
     [SerializeField] private Transform modelTransform;
 
     public Vector2 moveDirection;
 
+    private CharacterController _cc;
+    
     private void Awake()
     {
+        _cc = GetComponent<CharacterController>();
         _movement = GetComponent<Movement>();
+        
+        _inputActionAsset = GetComponent<PlayerInput>().actions;
+        _inputPlayer = _inputActionAsset.FindActionMap("PlayerMovement");
     }
 
     private void Update()
     {
+        if(!_cc.enabled) return;
+        
         _movement.SetVelocity(new Vector3(moveDirection.x, 0, moveDirection.y) * speed);
         LookAtClosestEnemy();
     }
+    
+    private void OnEnable()
+    {
+        _inputPlayer.Enable();
+    }
 
+    private void OnDisable()
+    {
+        _inputPlayer.Disable();
+    }
+
+    
+    public void Move(InputAction.CallbackContext ctx)
+    {
+        moveDirection = ctx.ReadValue<Vector2>();
+    }
+    
     private void LookAtClosestEnemy()
     {
         //TODO: Change this later since it's not efficient to find all enemies every frame.
@@ -66,5 +94,4 @@ public class PlayerMovement : Movement
         modelTransform.rotation =
             Quaternion.Lerp(modelTransform.rotation, lookAtWalkingRotation, Time.deltaTime * rotationSpeed);
     }
-    
 }

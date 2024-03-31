@@ -23,7 +23,7 @@ public class LevelStarter : MonoBehaviour
             var terrainInstance = Instantiate(terrainPrefab, new Vector3(0, 0, i * offsetLevelsDistance), Quaternion.identity);
             var terrainScript = terrainInstance.GetComponent<Terrain>();
 
-            terrainScript.PlayerSpawner.SpawnPlayer();
+            terrainScript.PlayerSpawner.SpawnPlayer(_playerJoinHandler.GetPlayerInputHandlers()[i]);
         }
     }
 }

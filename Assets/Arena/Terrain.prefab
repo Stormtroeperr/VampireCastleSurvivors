@@ -2242,6 +2242,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6215810836016116378}
     m_Modifications:
+    - target: {fileID: 3589762061369285493, guid: 1ccc0aed0bb093f40a9c56ef363d0af2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.33
+      objectReference: {fileID: 0}
     - target: {fileID: 4661626028362074773, guid: 1ccc0aed0bb093f40a9c56ef363d0af2,
         type: 3}
       propertyPath: m_Name
@@ -2330,9 +2335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b5463bbf704f7599541bcd80af684f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerWorldCanvas: {fileID: 5878164810530828541, guid: a536940052434ba459fb3ab3bd08ecc5,
-    type: 3}
-  playerPrefab: {fileID: 6631257755423517750, guid: b587423ba887343daae3208e1d1d6e47,
+  areaControllerPrefab: {fileID: 4262629105506194499, guid: 5054e0f42ebee0d4facd710b5616591f,
     type: 3}
 --- !u!1001 &7977223933290383416
 PrefabInstance:
