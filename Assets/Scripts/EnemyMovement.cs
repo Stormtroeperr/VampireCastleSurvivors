@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Health;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum MovementType
 {
@@ -10,26 +12,39 @@ public enum MovementType
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyMovement : MonoBehaviour
 {
-    public Transform target;
+    [Header("Target Settings")]
+    [SerializeField] private Transform target;
     
-    
-    [SerializeField] private  Vector3 _targetPosition;
-    
-    [SerializeField] private float speed = 3.5f;
+    [SerializeField] private  Vector3 targetPosition;
+    [SerializeField] private Vector3 currentRandomPosition;
     [SerializeField] private float mapSize = 10f;
     
-    [SerializeField] private Vector3 currentRandomPosition;
-    
+    [Header("Movement Settings")]
+    [SerializeField] private float speed = 3.5f;
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private MovementType movementType;
     
     private Rigidbody _rb;
-    
+
+    public Transform Target
+    {
+        set => target = value;
+    }
+
     public void Awake()
     {
         _rb = GetComponent<Rigidbody>();
     }
-    
+
+    public void Start()
+    {
+        if (!(bool)target)
+        {
+            // Failsafe in case the target is not set in the inspector.
+            target = FindObjectOfType<PlayerHealth>().gameObject.transform;
+        }
+    }
+
     private void FixedUpdate()
     {
         MoveTowardsTarget();
@@ -38,22 +53,22 @@ public class EnemyMovement : MonoBehaviour
 
     private void RotateTowardsTarget()
     {
-        var direction = (_targetPosition - _rb.position).normalized;
-        var currentXRotation = _rb.rotation.eulerAngles.x; // Store the current X rotation
+        var direction = (targetPosition - _rb.position).normalized;
+        var currentXRotation = _rb.rotation.eulerAngles.x;
 
         var targetRotation = Quaternion.LookRotation(direction);
         _rb.rotation = Quaternion.Lerp(_rb.rotation, targetRotation, Time.fixedDeltaTime * rotationSpeed);
 
         var rotation = _rb.rotation.eulerAngles;
-        rotation.x = currentXRotation; // Set the X rotation back to its original value
+        rotation.x = currentXRotation;
         _rb.rotation = Quaternion.Euler(rotation);
     }
     
     private void MoveTowardsTarget()
     {
-        _targetPosition = GetTargetPositionOrRandom();
+        targetPosition = GetTargetPositionOrRandom();
         
-        var direction = _targetPosition - _rb.position;
+        var direction = targetPosition - _rb.position;
         direction.Normalize();
         
         var speedDeltaTime = speed * Time.fixedDeltaTime;
@@ -64,7 +79,6 @@ public class EnemyMovement : MonoBehaviour
 
     private Vector3 GetTargetPositionOrRandom()
     {
-        // Check if the target exists and if the target is active
         if ((bool)target && target.gameObject.activeSelf)
         {
             return target.position;
