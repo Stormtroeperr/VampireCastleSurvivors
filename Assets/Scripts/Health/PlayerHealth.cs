@@ -18,7 +18,6 @@ namespace Health
         private Image _healthBarFill;
         private bool _isShaking;
         
-        private Vector3 _healthBarOriginalPosition;
         private Coroutine _lerpHealthCoroutine;
 
         private void Start()
@@ -32,9 +31,10 @@ namespace Health
 
         private void Update()
         {
-            _healthBarFill.transform.position = transform.position + Vector3.up * 3;
+            var currentPosition = transform.position + Vector3.up * 3;
+            _healthBarFill.transform.position = currentPosition;
             if (!_isShaking) return;
-            _healthBarFill.transform.position = _healthBarOriginalPosition + Random.insideUnitSphere * 0.2f;
+            _healthBarFill.transform.position = currentPosition + Random.insideUnitSphere * 0.2f;
         }
 
         private void CreateHealthBar()
@@ -47,14 +47,9 @@ namespace Health
             var healthBarImages = canvasInstance.GetComponentsInChildren<Image>();
             
             _healthBarFill = healthBarImages.FirstOrDefault(image => image.name == "HealthBarFill");
-            
-            if (_healthBarFill == null)
-            {
-                Debug.LogError("Health bar fill image not found");
-                return;
-            }
-            Debug.Log(_healthBarOriginalPosition);
-            _healthBarOriginalPosition = _healthBarFill.transform.position;
+
+            if (_healthBarFill != null) return;
+            Debug.LogError("Health bar fill image not found");
         }
 
         public override float Damage(float damage)
@@ -94,7 +89,7 @@ namespace Health
             yield return new WaitForSeconds(0.5f);
             _isShaking = false;
 
-            _healthBarFill.transform.position = _healthBarOriginalPosition;
+            _healthBarFill.transform.position =  transform.position + Vector3.up * 3;
         }
 
         protected override void SetToDeath()

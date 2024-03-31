@@ -1,3 +1,4 @@
+using Health;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -5,39 +6,77 @@ namespace EnemySpawner
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private EnemyMovement enemyPrefab;
-
-        [SerializeField] private float spawnRate = 1f;
-
-        private float _nextSpawnTime;
-
+        [Header("Enemy Spawner Settings")]
+        [SerializeField] private GameObject[] enemyPrefabs;
         [SerializeField, Range(0, 100)] private float spawnSphereRadius = 10f;
+        [SerializeField] private float spawnRate = 1f;
+        [SerializeField] private int difficulty = 1;
+        
+        private float _nextSpawnTime;
+        
+        [Header("Wave Settings")]
+        [SerializeField] private int currentWave = 1;
+        
+        [SerializeField] private int enemiesPerWave = 10;
+        [SerializeField] private int enemiesThisWave = 10;
+        
+        [SerializeField] private int enemiesSpawned = 0;
 
+        [SerializeField] private int enemiesKilled = 0;
+        [SerializeField] private int enemiesKilledThisWave = 0;
+        
         public Camera playerCamera;
         public Transform playerTransform;
 
         private void Update()
         {
             if (!(Time.time >= _nextSpawnTime)) return;
-    
+
             SpawnEnemy();
             _nextSpawnTime = Time.time + 1f / spawnRate;
         }
 
         private void SpawnEnemy()
         {
-            Vector3 spawnPosition; 
+
+            for (var i = enemyPrefabs.Length - 1; i >= 0; i--)
+            {
+                while (i <= difficulty && enemiesSpawned < enemiesPerWave)
+                {
+                    SpawnEnemyOfType(i);
+                    difficulty -= i;
+                    enemiesSpawned++;
+                }
+            }
+
+            while (enemiesSpawned < enemiesPerWave)
+            {
+                SpawnEnemyOfType(0);
+                enemiesSpawned++;
+            }
+
+            if (enemiesThisWave > enemiesKilledThisWave) return;
+            
+            currentWave++;
+            difficulty = currentWave;
+            
+            enemiesSpawned = 0;
+            enemiesKilledThisWave = 0;
+            
+            enemiesPerWave += 5;
+            enemiesThisWave = enemiesPerWave;
+        }
+
+        private void SpawnEnemyOfType(int index)
+        {
+            Vector3 spawnPosition;
             var position = transform.position;
 
             do
             {
-                // Generate a random angle between 0 and 360 degrees
                 var angle = Random.Range(0f, 360f);
-
-                // Convert the angle to radians
                 angle *= Mathf.Deg2Rad;
-            
-                // Calculate the new spawn position
+
                 spawnPosition = new Vector3(
                     position.x + spawnSphereRadius * Mathf.Cos(angle),
                     position.y,
@@ -45,26 +84,27 @@ namespace EnemySpawner
                 );
 
             } while (IsPositionInCameraFrustum(playerCamera, spawnPosition));
-        
 
-            // Instantiate the enemy at the new spawn position
-            var enemyMovement = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+            var enemyPrefab = enemyPrefabs[index];
+            var enemyMovement = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity).GetComponent<EnemyMovement>();
+            enemyMovement.GetComponent<EnemyHealth>().OnDie += OnEnemyDeath;
+            
             enemyMovement.Target = playerTransform.transform;
         }
 
+        private void OnEnemyDeath(GameObject enemy)
+        {
+            enemiesKilled++;
+            enemiesKilledThisWave++;
+        }
+        
         private bool IsPositionInCameraFrustum(Camera cam, Vector3 position)
         {
-            // Create a negligible size bounds at the position
-            Bounds bounds = new Bounds(position, Vector3.zero);
-
-            // Get the camera's frustum planes
-            Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cam);
-
-            // Check if the bounds intersect with the frustum planes
+            var bounds = new Bounds(position, Vector3.zero);
+            var planes = GeometryUtility.CalculateFrustumPlanes(cam);
             return GeometryUtility.TestPlanesAABB(planes, bounds);
         }
-    
-        // Debugging
+
         [SerializeField] private bool debugSpawnSphere = false;
 
         private void OnDrawGizmos()

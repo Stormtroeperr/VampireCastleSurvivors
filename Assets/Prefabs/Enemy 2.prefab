@@ -203,8 +203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3febf8c928be4847877789a6146d19b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 500
-  currentHealth: 500
+  maxHealth: 200
+  currentHealth: 200
   onDeathParticlePrefab: {fileID: 4420003607963709086, guid: 3acaa773c34c98844a5f139ab7b4d36f,
     type: 3}
 --- !u!1001 &2961931546007740349
