@@ -39,8 +39,14 @@ public class EnemyMovement : MonoBehaviour
     private void RotateTowardsTarget()
     {
         var direction = (_targetPosition - _rb.position).normalized;
+        var currentXRotation = _rb.rotation.eulerAngles.x; // Store the current X rotation
+
         var targetRotation = Quaternion.LookRotation(direction);
         _rb.rotation = Quaternion.Lerp(_rb.rotation, targetRotation, Time.fixedDeltaTime * rotationSpeed);
+
+        var rotation = _rb.rotation.eulerAngles;
+        rotation.x = currentXRotation; // Set the X rotation back to its original value
+        _rb.rotation = Quaternion.Euler(rotation);
     }
     
     private void MoveTowardsTarget()
