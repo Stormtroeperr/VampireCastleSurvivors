@@ -76,7 +76,7 @@ namespace EnemySpawner
         private void SpawnEnemyOfType(int index)
         {
             Vector3 spawnPosition;
-            var position = transform.position;
+            var position = transform.position + Vector3.up * 2f;
 
             do
             {

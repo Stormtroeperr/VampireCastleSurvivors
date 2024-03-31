@@ -1,6 +1,7 @@
 ﻿
 using System;
 using Health;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Inventory: MonoBehaviour
@@ -14,17 +15,18 @@ public class Inventory: MonoBehaviour
     [SerializeField] private int gold;
 
     [SerializeField] private GameObject[] items;
+    [SerializeField] private Camera _spawnAreaCamera;
     
     private EnemySpawner.EnemySpawner _enemySpawner;
     
-    public void Start()
+    public void Awake()
     {
         var areaController = Instantiate(areaControllerPrefab, transform.position, Quaternion.identity);
         _enemySpawner = areaController.GetComponent<EnemySpawner.EnemySpawner>();
-        
-        _enemySpawner.playerCamera = GetComponentInChildren<Camera>();
+
         //We want to get the Model of the player and the only way we can get that is by getting the playerhealth component
-        _enemySpawner.playerTransform = GetComponentInChildren<PlayerHealth>().transform;
+        _enemySpawner.playerCamera = _spawnAreaCamera;
+        _enemySpawner.playerTransform = GetComponent<PlayerHealth>().transform;
         
         _enemySpawner.OnEnemySpawned += SubscribeToEnemyDeath;
     }
@@ -47,4 +49,12 @@ public class Inventory: MonoBehaviour
         gold += enemyHealth.GoldValue;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("XP"))
+        {
+            xp += other.GetComponent<FloatObject>().xpValue;
+            Destroy(other.gameObject);
+        };
+    }
 }
