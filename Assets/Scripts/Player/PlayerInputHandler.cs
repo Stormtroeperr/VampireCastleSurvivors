@@ -1,45 +1,47 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInput))]
-public class PlayerInputHandler : MonoBehaviour
+namespace Player
 {
-    private PlayerMovement playerMovement;
-    
-    
-    public PlayerMovement PlayerMovement
+    [RequireComponent(typeof(PlayerInput))]
+    public class PlayerInputHandler : MonoBehaviour
     {
-        get => playerMovement;
-        set => playerMovement = value;
-    }
+        private PlayerMovement playerMovement;
     
     
-    private InputActionAsset _inputActionAsset;
-    private InputActionMap _inputPlayer;
-    private InputAction _moveAction;
+        public PlayerMovement PlayerMovement
+        {
+            get => playerMovement;
+            set => playerMovement = value;
+        }
     
-    private void Awake()
-    {
-        _inputActionAsset = GetComponent<PlayerInput>().actions;
-        _inputPlayer = _inputActionAsset.FindActionMap("PlayerMovement");
-    }
+    
+        private InputActionAsset _inputActionAsset;
+        private InputActionMap _inputPlayer;
+        private InputAction _moveAction;
+    
+        private void Awake()
+        {
+            _inputActionAsset = GetComponent<PlayerInput>().actions;
+            _inputPlayer = _inputActionAsset.FindActionMap("PlayerMovement");
+        }
 
-    private void Update()
-    {
-        if (!(bool)playerMovement) return;
+        private void Update()
+        {
+            if (!(bool)playerMovement) return;
         
-        playerMovement.moveDirection = _moveAction.ReadValue<Vector2>();
-    }
+            playerMovement.moveDirection = _moveAction.ReadValue<Vector2>();
+        }
 
-    private void OnEnable()
-    {
-        _moveAction = _inputPlayer.FindAction("Move");
-        _inputPlayer.Enable();
-    }
+        private void OnEnable()
+        {
+            _moveAction = _inputPlayer.FindAction("Move");
+            _inputPlayer.Enable();
+        }
 
-    private void OnDisable()
-    {
-        _inputPlayer.Disable();
+        private void OnDisable()
+        {
+            _inputPlayer.Disable();
+        }
     }
 }

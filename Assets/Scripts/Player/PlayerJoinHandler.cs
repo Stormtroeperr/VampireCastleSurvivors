@@ -1,57 +1,60 @@
-using System.Collections;
 using System.Collections.Generic;
+using Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInputManager))]
-public class PlayerJoinHandler : MonoBehaviour, IPlayerJoinListener
+namespace Player
 {
-    private PlayerInputManager _playerInputManager;
-    private bool _isGameStarted;
-    
-    public List<PlayerInput> _playerInputHandler = new();
-    
-    // List of IPlayerJoinListener instances
-    private readonly List<IPlayerJoinListener> _playerJoinListeners = new();
-    
-    private void Awake  ()
+    [RequireComponent(typeof(PlayerInputManager))]
+    public class PlayerJoinHandler : MonoBehaviour, IPlayerJoinListener
     {
-        _playerInputManager = GetComponent<PlayerInputManager>();
-    }
+        private PlayerInputManager _playerInputManager;
+        private bool _isGameStarted;
     
-    // OnPlayerJoined method receives a PlayerInput instance and adds it to the list.
-    // this instance is a PlayerInputHandler but not the player prefab itself.
-    public void OnPlayerJoined(PlayerInput player)
-    {
-        _playerInputHandler.Add(player);
-
-        player.GetComponent<PlayerInputHandler>();
-        
-        foreach (var listener in _playerJoinListeners)
+        public List<PlayerInput> _playerInputHandler = new();
+    
+        // List of IPlayerJoinListener instances
+        private readonly List<IPlayerJoinListener> _playerJoinListeners = new();
+    
+        private void Awake  ()
         {
-            listener.OnPlayerJoined(player);
+            _playerInputManager = GetComponent<PlayerInputManager>();
         }
-        
-        if (_playerInputHandler.Count == 2)
+    
+        // OnPlayerJoined method receives a PlayerInput instance and adds it to the list.
+        // this instance is a PlayerInputHandler but not the player prefab itself.
+        public void OnPlayerJoined(PlayerInput player)
         {
-            _playerInputManager.DisableJoining();
-        }
-    }
-    
-    // Method to add a listener to the list
-    public void AddPlayerJoinListener(IPlayerJoinListener listener)
-    {
-        _playerJoinListeners.Add(listener);
-    }
+            _playerInputHandler.Add(player);
 
-    // Method to remove a listener from the list
-    public void RemovePlayerJoinListener(IPlayerJoinListener listener)
-    {
-        _playerJoinListeners.Remove(listener);
-    }
+            player.GetComponent<PlayerInputHandler>();
+        
+            foreach (var listener in _playerJoinListeners)
+            {
+                listener.OnPlayerJoined(player);
+            }
+        
+            if (_playerInputHandler.Count == 2)
+            {
+                _playerInputManager.DisableJoining();
+            }
+        }
     
-    public int GetPlayerCount()
-    {
-        return _playerInputHandler.Count;
+        // Method to add a listener to the list
+        public void AddPlayerJoinListener(IPlayerJoinListener listener)
+        {
+            _playerJoinListeners.Add(listener);
+        }
+
+        // Method to remove a listener from the list
+        public void RemovePlayerJoinListener(IPlayerJoinListener listener)
+        {
+            _playerJoinListeners.Remove(listener);
+        }
+    
+        public int GetPlayerCount()
+        {
+            return _playerInputHandler.Count;
+        }
     }
 }

@@ -5,6 +5,7 @@ public class Health : MonoBehaviour, IDamagable
 {
     [SerializeField] protected float maxHealth = 100f;
     [SerializeField] protected float currentHealth = 100f;
+    [SerializeField] protected ParticleSystem onDeathParticle;
     
     [SerializeField] protected bool isGodMode;
     
@@ -34,6 +35,7 @@ public class Health : MonoBehaviour, IDamagable
     
     protected virtual void SetToDeath()
     {
+        onDeathParticle.Play();
         OnDie?.Invoke(gameObject);
         gameObject.SetActive(false);
         currentHealth = maxHealth;

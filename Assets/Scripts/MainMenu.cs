@@ -1,4 +1,6 @@
 using System;
+using Interfaces;
+using Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;

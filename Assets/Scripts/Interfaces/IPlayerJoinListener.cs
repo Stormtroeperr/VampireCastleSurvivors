@@ -1,6 +1,9 @@
 using UnityEngine.InputSystem;
 
-public interface IPlayerJoinListener
+namespace Interfaces
 {
-    void OnPlayerJoined(PlayerInput player);
+    public interface IPlayerJoinListener
+    {
+        void OnPlayerJoined(PlayerInput player);
+    }
 }
